@@ -1,0 +1,20 @@
+in backend
+
+Hotel CRUD(location wise hotels)
+with active status
+
+dishes categories(veg and nonveg)
+
+subcategries(crud)
+chinese
+indian
+punjabi
+Thai 
+Mexican
+dessert
+breakfast
+
+
+
+admin login
+user login
