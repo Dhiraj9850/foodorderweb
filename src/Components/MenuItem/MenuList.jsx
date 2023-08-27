@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ExtrasModal from './ExtrasModal';
 
 
 const MenuList = ({addToCart}) => {
-  
+    
+    const [showextrasModal, setShowextrasModal] = useState(false);
+    const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 
    
     const menuItems = [
@@ -10,7 +13,15 @@ const MenuList = ({addToCart}) => {
             name: 'plain maggie',
             price: 30,
             category: 'Quick Bites',
-            extras:["cheese","sauce","peri peri sauce"],
+            extras:[
+            {
+                name:"cheese",
+                price:30
+            },{
+                name:"peri peri sauce",
+                price:20
+            }
+        ],
             isVeg: true
         },
         {
@@ -23,7 +34,16 @@ const MenuList = ({addToCart}) => {
             name: 'chicken biryani',
             price: 160,
             category: 'Main Course',
-            extras:["half","full"],
+            extras:[
+                {
+                    name:"half",
+                    price:160
+                },
+                {
+                   name:"full",
+                   price:220  
+                }
+            ],
             isVeg: false
         },
         {
@@ -58,6 +78,35 @@ const MenuList = ({addToCart}) => {
         }
     ]
 
+    const handleAddWithoutExtras=(menuItem)=>{
+        if(menuItem.extras){
+            setSelectedMenuItem(menuItem);
+            setShowextrasModal(true);
+        }
+        else{
+            addToCart(menuItem);
+        }
+    }
+
+    const handleCloseExtrasModal=()=>{
+        setSelectedMenuItem(null);
+        setShowextrasModal(false);
+    }
+
+    const handleExtrasContinue =(selectedExtras)=>{
+         const customizeMenuItem = {
+            ...selectedMenuItem,
+            selectedExtras:selectedExtras.map(extra=>({
+                name:extra.name,
+                price:extra.price
+            }))
+         };
+
+         addToCart(customizeMenuItem);
+         setShowextrasModal(false);
+         setSelectedMenuItem(null);
+    }
+
     const categories = [...new Set(menuItems.map(item => item.category))]
     return (
         <div>
@@ -81,7 +130,7 @@ const MenuList = ({addToCart}) => {
                                                 <p className="text-muted mb-0 big">Rs.{menuItem.price}</p>
                                             </div>
                                             <span className="ms-auto">
-                                                <button className="btn btn-sm btn-outline-danger" onClick={()=>addToCart(menuItem)}>ADD</button>
+                                                <button className="btn btn-sm btn-outline-danger" onClick={()=>handleAddWithoutExtras(menuItem)}>ADD</button>
                                             </span>
 
                                         </div>
@@ -94,8 +143,14 @@ const MenuList = ({addToCart}) => {
                     </div>
                 ))}
 
-                
             </div>
+            {selectedMenuItem && 
+              <ExtrasModal  showModal={showextrasModal} 
+              handleClose={handleCloseExtrasModal}
+              menuItem={selectedMenuItem}
+              handleExtrasContinue={handleExtrasContinue}
+              />
+            }
         </div>
 
 

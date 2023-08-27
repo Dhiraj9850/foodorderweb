@@ -86,7 +86,6 @@ const Navbar = () => {
                                 </div>
                             </a>
                             <label>
-                                <input type="checkbox" name=""/>
                                 <div className="bar">
                                     <span className="top"></span>
                                     <span className="middle"></span>
