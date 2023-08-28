@@ -120,10 +120,10 @@ const MenuList = ({addToCart}) => {
                             <small className="text-black-50 ms-2">({menuItems.filter(item => item.category === category).length} items)</small>
                         </h6>
                         {menuItems.filter(item => item.category === category)
-                            .map((menuItem, index) => (
-                                <div className="col-md-12 mx-0 border-top">
+                            .map((menuItem) => (
+                                <div className="col-md-12 mx-0 border-top"key={menuItem.name}>
                                     <div>
-                                        <div className="d-flex gap-2 p-3 border-bottom" key={index}>
+                                        <div className="d-flex gap-2 p-3 border-bottom" >
                                             <div className={`fw-bold  text-${menuItem.isVeg ? 'success' : 'danger'} text-center ${menuItem.isVeg ? 'veg' : 'non-veg'}`}>.</div>
                                             <div>
                                                 <h6 className="mb-1">{menuItem.name}</h6>

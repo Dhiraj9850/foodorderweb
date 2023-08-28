@@ -13,7 +13,7 @@ const MenuItems = () => {
 
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart=(menuItem)=>{
+  const addToCart=(menuItem,selectedExtras)=>{
        const existingMenu = cartItems.find(item=>item.menuItem.name===menuItem.name);
 
        if(existingMenu){
@@ -21,7 +21,7 @@ const MenuItems = () => {
           setCartItems(updatedCart);
        }
        else{
-          setCartItems([...cartItems,{menuItem,quantity:1}])
+         setCartItems([...cartItems,{menuItem,selectedExtras,quantity:1}]);;
        }
   }
 

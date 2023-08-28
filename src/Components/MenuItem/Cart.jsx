@@ -1,18 +1,16 @@
 import React from 'react'
 
 const Cart = (props) => {
-   const {handleIncrement,cartItems,handleDecrement} = props
-  
-   const calculateTotal=()=>{
-      let total = 0;
+  const { handleIncrement, cartItems, handleDecrement } = props
 
-      for(const cartItem of cartItems){
-         total += cartItem.menuItem.price * cartItem.quantity;
-      }
-      return total;
-   }
+  const calculateTotal = () => {
+    let total = 0;
 
-
+    for (const cartItem of cartItems) {
+      total += cartItem.menuItem.price * cartItem.quantity;
+    }
+    return total;
+  }
   return (
     <div>
       <div className="shadow-sm rounded overflow-hidden bg-white mb-3">
@@ -26,26 +24,43 @@ const Cart = (props) => {
           </div>
         </div>
         <div className="bg-white border-bottom py-2">
-          {cartItems.map((cartItem,index) => (
-            <div className="cartmenu d-flex align-items-center justify-content-between px-3 py-2 border-bottom"key={index}>
-              <div className="d-flex align-items-center">
-                <div className={`me-2 text-${cartItem.menuItem.isVeg ? 'success' : 'danger'} ${cartItem.isVeg ? 'veg' : 'non-veg'}`}>·</div>
-                <div className="menu-body">
-                  <p className="small m-0">{cartItem.menuItem.name}</p>
+          {cartItems.map((cartItem, index) => (
+            <div>
+              <div className="cartmenu d-flex align-items-center justify-content-between px-3 py-2 border-top" key={index}>
+                <div className="d-flex align-items-center">
+                  <div className={`me-2 text-${cartItem.menuItem.isVeg ? 'success' : 'danger'} ${cartItem.isVeg ? 'veg' : 'non-veg'}`}>·</div>
+                  <div className="menu-body">
+                    <p className="big m-0">{cartItem.menuItem.name}</p>
+                  
+                  </div>
+                </div>
+                <div className="d-flex align-items-center">
+                  <span className="count-number">
+                    <button className="btn btn-sm btn-outline-secondary dec" onClick={() => handleDecrement(cartItem)} type="button">
+                      <i className="bi bi-dash"></i>
+                    </button>
+                    <input type="text" className="count-number-input" readOnly value={cartItem.quantity} />
+                    <button className="btn btn-sm btn-outline-secondary inc" onClick={() => handleIncrement(cartItem)} type="button">
+                      <i className="bi bi-plus"></i>
+                    </button>
+                  </span>
+                  <p className="text-muted small mb-0 ms-2">Rs.{cartItem.menuItem.price}</p>
                 </div>
               </div>
-              <div className="d-flex align-items-center">
-                <span className="count-number">
-                  <button className="btn btn-sm btn-outline-secondary dec" onClick={()=>handleDecrement(cartItem)} type="button">
-                    <i className="bi bi-dash"></i>
-                  </button>
-                  <input type="text" className="count-number-input" readOnly value={cartItem.quantity} />
-                  <button className="btn btn-sm btn-outline-secondary inc" onClick={()=>handleIncrement(cartItem)} type="button">
-                    <i className="bi bi-plus"></i>
-                  </button>
-                </span>
-                <p className="text-muted small mb-0 ms-2">Rs.{cartItem.menuItem.price}</p>
+              <div className="px-3">
+              {cartItem.menuItem.selectedExtras && <h6 className="text-secondary  border-top-dashed">Extras</h6>}
+              {cartItem.menuItem.selectedExtras && cartItem.menuItem.selectedExtras.map(extra=>(
+                <div className="">
+                   <div className="d-flex justify-content-between my-2">
+                      <span className="cart-extra-name big">{extra.name}</span>
+                      <span className="cart-extra-price big">+ Rs.{extra.price}</span>
+                   </div>
               </div>
+              ))}
+              </div>
+              
+
+
             </div>
           ))}
         </div>

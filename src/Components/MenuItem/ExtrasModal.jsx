@@ -6,29 +6,19 @@ const ExtrasModal = (props) => {
     const [selectedExtras, setSelectedExtras] = useState([]);
 
     const handleExtrasToggle = (extra) => {
-      if(selectedExtras.some(item=>item.name===extra.name)){
-         setSelectedExtras(selectedExtras.filter(item=>item.name !== extra.name))
-      }
-      else{
-        setSelectedExtras([...selectedExtras,extra])
-      }
+        if (selectedExtras.includes(extra.name)){
+            setSelectedExtras(selectedExtras.filter(item => item !== extra.name))
+        }
+        else{
+            setSelectedExtras([...selectedExtras, extra.name])
+        }
     }
-    // const handleExtrasToggle = (extra) => {
-    //     if (selectedExtras.includes(extra.name)){
-    //         setSelectedExtras(selectedExtras.filter(item => item !== extra.name))
-    //     }
-    //     else{
-    //         setSelectedExtras([...selectedExtras, extra.name])
-    //     }
-    // }
 
     const handleContinueClick = () => {
         const selectedExtraObjects = menuItem.extras.filter(extra => selectedExtras.includes(extra.name));
-        const customizedMenuItem={
-            ...menuItem,
-            selectedExtras:selectedExtraObjects
-        };
-        handleExtrasContinue(customizedMenuItem);
+        handleExtrasContinue(selectedExtraObjects,selectedExtras);
+        console.log("Selected Extra Objects:", selectedExtraObjects);
+
     }
 
     const calculateTotalPrice=()=>{
@@ -54,10 +44,10 @@ const ExtrasModal = (props) => {
                         </div>
                         <div className="modal-body">
                             <h5 className="text-dark py-3">Add Extras</h5>
-                            {menuItem.extras.map(extra => (
-                                <div className="d-flex align-items-center my-3">
-                                    <div class="form-check"key={extra.name}>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" 
+                            {menuItem.extras.map(extra=> (
+                                <div className="d-flex align-items-center my-3"key={extra.name}>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" 
                                         checked={selectedExtras.includes(extra.name)}
                                         onChange={()=>handleExtrasToggle(extra)}/>
                                     </div>

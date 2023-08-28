@@ -113,7 +113,10 @@ textarea:focus {
     transition: all 0.4s ease-in-out;
 
 }
-
+.border-top-dashed{
+    border-top: 0.5px dashed rgb(160, 158, 158);
+    padding: 6px 0;
+}
 .btn-primary:focus {
     border-color: var(--primary-color) !important;
     background-color: #c91a54 !important;
