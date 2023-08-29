@@ -37,11 +37,11 @@ const MenuList = ({addToCart}) => {
             extras:[
                 {
                     name:"half",
-                    price:160
+                    price:0
                 },
                 {
                    name:"full",
-                   price:220  
+                   price:60  
                 }
             ],
             isVeg: false
@@ -108,6 +108,8 @@ const MenuList = ({addToCart}) => {
     }
 
     const categories = [...new Set(menuItems.map(item => item.category))]
+
+    
     return (
         <div>
             <div className="shadow-sm rounded bg-white mb-3 overflow-hidden">
@@ -121,7 +123,7 @@ const MenuList = ({addToCart}) => {
                         </h6>
                         {menuItems.filter(item => item.category === category)
                             .map((menuItem) => (
-                                <div className="col-md-12 mx-0 border-top"key={menuItem.name}>
+                                <div className="col-md-12 mx-0 border-top" key={menuItem.name}>
                                     <div>
                                         <div className="d-flex gap-2 p-3 border-bottom" >
                                             <div className={`fw-bold  text-${menuItem.isVeg ? 'success' : 'danger'} text-center ${menuItem.isVeg ? 'veg' : 'non-veg'}`}>.</div>

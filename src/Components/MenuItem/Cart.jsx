@@ -3,14 +3,22 @@ import React from 'react'
 const Cart = (props) => {
   const { handleIncrement, cartItems, handleDecrement } = props
 
-  const calculateTotal = () => {
-    let total = 0;
+  
+   const calculateTotal=()=>{
+      let total = 0;
 
-    for (const cartItem of cartItems) {
-      total += cartItem.menuItem.price * cartItem.quantity;
-    }
-    return total;
-  }
+      for(const cartItem of cartItems){
+         total += cartItem.menuItem.price * cartItem.quantity;
+
+         if(cartItem.menuItem.selectedExtras){
+            for(const extra of cartItem.menuItem.selectedExtras){
+               total+= extra.price;
+            }
+         }
+      }
+      return total;
+   }
+  
   return (
     <div>
       <div className="shadow-sm rounded overflow-hidden bg-white mb-3">
