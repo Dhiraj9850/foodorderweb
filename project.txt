@@ -18,3 +18,40 @@ breakfast
 
 admin login
 user login
+
+some backup code
+
+const addToCart = (menuItem, selectedExtras) => {
+    const existingCartItem = cartItems.find(item => item.menuItem === menuItem && item.selectedExtras === selectedExtras);
+
+    if (existingCartItem) {
+      const updatedCart = cartItems.map(item =>
+        item.menuItem === menuItem && item.selectedExtras === selectedExtras
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      setCartItems(updatedCart);
+    } else {
+      setCartItems([...cartItems, { menuItem, selectedExtras, quantity: 1 }]);
+    }
+  };
+
+  const handleIncrement = (cartItem) => {
+    const updatedCart = cartItems.map(item =>
+      item.menuItem === cartItem.menuItem && item.selectedExtras === cartItem.selectedExtras
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+    setCartItems(updatedCart);
+  };
+
+  const handleDecrement = (cartItem) => {
+    const updatedCart = cartItems.map(item =>
+      item.menuItem === cartItem.menuItem && item.selectedExtras === cartItem.selectedExtras
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+
+    const filteredCart = updatedCart.filter(item => item.quantity > 0);
+    setCartItems(filteredCart);
+  };

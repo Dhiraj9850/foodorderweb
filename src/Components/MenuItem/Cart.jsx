@@ -39,7 +39,6 @@ const Cart = (props) => {
                   <div className={`me-2 text-${cartItem.menuItem.isVeg ? 'success' : 'danger'} ${cartItem.isVeg ? 'veg' : 'non-veg'}`}>·</div>
                   <div className="menu-body">
                     <p className="big m-0">{cartItem.menuItem.name}</p>
-                  
                   </div>
                 </div>
                 <div className="d-flex align-items-center">
@@ -56,15 +55,30 @@ const Cart = (props) => {
                 </div>
               </div>
               <div className="px-3">
-              {cartItem.menuItem.selectedExtras && <h6 className="text-secondary  border-top-dashed">Extras</h6>}
+              {/* {cartItem.menuItem.selectedExtras && <h6 className="text-secondary  border-top-dashed">Extras</h6>}
               {cartItem.menuItem.selectedExtras && cartItem.menuItem.selectedExtras.map(extra=>(
-                <div className="">
+                <div className=""key={extra.name}>
                    <div className="d-flex justify-content-between my-2">
                       <span className="cart-extra-name big">{extra.name}</span>
                       <span className="cart-extra-price big">+ Rs.{extra.price}</span>
                    </div>
               </div>
-              ))}
+              ))} */}
+               {cartItem.menuItem.selectedExtras && cartItem.menuItem.selectedExtras.length > 0 ?(
+                <>
+                   <h6 className="text-secondary border-top-dashed">Extras</h6>
+                   {cartItem.menuItem.selectedExtras.map(extra=>(
+                      <div className=""key={extra.name}>
+                      <div className="d-flex justify-content-between my-2">
+                         <span className="cart-extra-name big">{extra.name}</span>
+                         <span className="cart-extra-price big">+ Rs.{extra.price}</span>
+                      </div>
+                 </div>
+                   ))}
+                </>
+               ):(
+                   <h6 className="text-secondary">No extras.</h6>
+               )}
               </div>
               
 
@@ -103,7 +117,9 @@ const Cart = (props) => {
           </h6>
         </div>
         <div className="p-3">
-          <button className="btn btn-lg btn-success w-100 paymentbtn">PAY Rs.150 <i className="bi bi-arrow-right"></i></button>
+          <button className="btn btn-lg btn-success w-100 paymentbtn"> 
+          <span>PAY Rs.150</span>
+          <span className="arrowicon"><i className="bi bi-arrow-right"></i></span> </button>
         </div>
       </div>
     </div>

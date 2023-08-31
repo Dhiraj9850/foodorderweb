@@ -595,3 +595,18 @@ input[type="checkbox"]{
 .extraslabel:hover{
    font-weight: 500;
 }
+.paymentbtn {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease-out;
+  }
+  
+
+  .paymentbtn .bi-arrow-right {
+    margin-left: 5px; /* Add some space between text and arrow */
+    transition: transform 0.3s ease-out;
+  }
+  
+  .paymentbtn:hover .bi-arrow-right {
+    transform: translateX(5px);
+  }
