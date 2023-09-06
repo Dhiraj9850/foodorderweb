@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
+
 const ExtrasModal = (props) => {
     const { showModal, handleClose, handleExtrasContinue, menuItem } = props;
 
     const [selectedExtras, setSelectedExtras] = useState([]);
+   
 
     const handleExtrasToggle = (extra) => {
         if (selectedExtras.includes(extra.name)){
@@ -14,13 +16,18 @@ const ExtrasModal = (props) => {
         }
     }
 
+    
     const handleContinueClick = () => {
-        const selectedExtraObjects = menuItem.extras.filter(extra => selectedExtras.includes(extra.name));
-        handleExtrasContinue(selectedExtraObjects,selectedExtras);
-        console.log("Selected Extra Objects:", selectedExtraObjects);
+        setTimeout(() => {
+            const selectedExtraObjects = menuItem.extras.filter(extra => selectedExtras.includes(extra.name));
+            handleExtrasContinue(selectedExtraObjects,selectedExtras);
+            console.log("Selected Extra Objects:", selectedExtraObjects);
+        }, 800);
+      
 
     }
 
+    
     const calculateTotalPrice=()=>{
         const basePrice= menuItem.price;
         const extrasTotal = selectedExtras.reduce((total,extraName)=>{
@@ -29,6 +36,8 @@ const ExtrasModal = (props) => {
         },0)
         return basePrice + extrasTotal;
     }
+
+    
     return (
         <div>
             <div className={`modal ${showModal ? 'show' : ''}`} tabIndex="-1" style={{ display: showModal ? 'block' : 'none' }}>

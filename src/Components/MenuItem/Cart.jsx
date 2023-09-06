@@ -55,15 +55,7 @@ const Cart = (props) => {
                 </div>
               </div>
               <div className="px-3">
-              {/* {cartItem.menuItem.selectedExtras && <h6 className="text-secondary  border-top-dashed">Extras</h6>}
-              {cartItem.menuItem.selectedExtras && cartItem.menuItem.selectedExtras.map(extra=>(
-                <div className=""key={extra.name}>
-                   <div className="d-flex justify-content-between my-2">
-                      <span className="cart-extra-name big">{extra.name}</span>
-                      <span className="cart-extra-price big">+ Rs.{extra.price}</span>
-                   </div>
-              </div>
-              ))} */}
+            
                {cartItem.menuItem.selectedExtras && cartItem.menuItem.selectedExtras.length > 0 ?(
                 <>
                    <h6 className="text-secondary border-top-dashed">Extras</h6>

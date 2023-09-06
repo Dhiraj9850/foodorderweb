@@ -89,15 +89,6 @@ textarea:focus {
     color: white;
 }
 
-.btn-primarygred:hover {
-    background: linear-gradient(45deg, #d92662 0%, #e23744 100%);
-    color: white;
-}
-
-.btn-primarygred:focus {
-    background: linear-gradient(45deg, #d92662 0%, #e23744 100%);
-    color: white !important;
-}
 
 .bg-success {
     background-color: #198754 !important;
@@ -468,8 +459,28 @@ input[type="checkbox"]:checked~.bar .middle {
 .modalapply {
     font-size: 16px;
     font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    z-index: 1;
 }
-
+.modalapply::before{
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color:#c22449;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+    z-index: -1;
+}
+.modalapply:focus::before{
+    width: 100%;
+}
+.modalapply:hover{
+    box-shadow: 0px 6px 10px rgb(174, 174, 174);
+}
 .modaldismiss:focus {
     border: 0;
 }
@@ -489,8 +500,8 @@ h5.modal-title {
     display: flex;
     align-items: center;
     padding: 0 3px;
-
 }
+
 
 .count-number .btn {
     padding: 2px 4px;
@@ -502,7 +513,64 @@ h5.modal-title {
     text-align: center;
 
 }
+.countadd{
+    border: 1px solid #e13545;
+    border-radius: 5px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    transition: all 0.5s;
+}
 
+.addbtn{
+    width: 85px;
+}
+.addbtn:hover{
+    box-shadow: 5px 5px 12px #dbb8c4;
+}
+.countadd .btn{
+    padding: 1px 1px;
+    font-size: 14.2px;
+    border: initial;
+    width: 20px;
+    border-radius: 17px;
+    height: 20px;
+    text-align: center;
+}
+.countadd .btn{
+    background-color: white !important;   
+    color: #e13545 !important; 
+}
+.countadd  .inc{
+    animation: transright 0.255s forwards ease-in;
+}
+.countadd .dec{
+    animation: transleft 0.255s forwards ease-in;
+}
+@keyframes transright{
+    0%{
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+@keyframes transleft{
+    0%{
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+.countadd .dec{
+    transform: scale(1.2);
+}
 .count-number-input {
     width: 21px;
     text-align: center;
@@ -515,7 +583,6 @@ h5.modal-title {
     outline: none;
     font-size: 13px;
 }
-
 .cartmenu .non-veg {
     border: 1px solid;
     width: 15px;
@@ -610,3 +677,6 @@ input[type="checkbox"]{
   .paymentbtn:hover .bi-arrow-right {
     transform: translateX(5px);
   }
+
+ 
+

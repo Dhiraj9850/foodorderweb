@@ -21,26 +21,29 @@ const MenuItems = () => {
           setCartItems(updatedCart);
        }
        else{
-         setCartItems([...cartItems,{menuItem,selectedExtras,quantity:1}]);;
+         setCartItems([...cartItems,{menuItem,selectedExtras,quantity:1}]);
        }
   }
 
-  const handleIncrement=(cartItem)=>{
-    const index = cartItems.findIndex(item=>item.menuItem===cartItem.menuItem);
-
-    if(index !== -1){
-      const updatedCart = [...cartItems];
-      updatedCart[index] = {...updatedCart[index],quantity:updatedCart[index].quantity + 1};
-      setCartItems(updatedCart);
-    }
-  }
   
-  const handleDecrement =(cartItem)=>{
-     const updatedCart = cartItems.map(item=>item.menuItem === cartItem.menuItem ? {...item,quantity:item.quantity-1}:item);
+  const handleIncrement = (cartItem) => {
+    const index = cartItems.findIndex((item) => item.menuItem.name === cartItem.menuItem.name);
 
-     const filteredCart= updatedCart.filter(item=>item.quantity > 0);
-     setCartItems(filteredCart);
-  }
+    if (index !== -1) {
+        const updatedCart = [...cartItems];
+        updatedCart[index] = { ...updatedCart[index], quantity: updatedCart[index].quantity + 1 };
+        setCartItems(updatedCart);
+    }
+};
+
+const handleDecrement = (cartItem) => {
+    const updatedCart = cartItems.map((item) =>
+        item.menuItem.name === cartItem.menuItem.name ? { ...item, quantity: item.quantity - 1 } : item
+    );
+
+    const filteredCart = updatedCart.filter((item) => item.quantity > 0);
+    setCartItems(filteredCart);
+};
 
   return (
     <>
@@ -51,7 +54,7 @@ const MenuItems = () => {
         <div className="container position-relative">
           <div className="row pt-3">
             <div className="col-md-8">
-              <MenuList  addToCart={addToCart}/>
+              <MenuList cartItems={cartItems}  addToCart={addToCart} handleDecrement={handleDecrement} handleIncrement={handleIncrement}/>
               <Rating />
               <Reviews />
               <AddReview />
