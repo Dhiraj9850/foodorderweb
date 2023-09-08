@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import ExtrasModal from './ExtrasModal';
-
+import ChoiceModal from './ChoiceModal';
 
 const MenuList = (props) => {
 
     const { addToCart, handleDecrement, handleIncrement, cartItems } = props
 
     const [showextrasModal, setShowextrasModal] = useState(false);
+    const [showChoiceModal, setShowChoiceModal] = useState(false);
+
     const [selectedMenuItem, setSelectedMenuItem] = useState(null);
-   
+    const [selectedExtras, setSelectedExtras] = useState([]);
 
 
     const menuItems = [
@@ -91,12 +93,37 @@ const MenuList = (props) => {
         }
     }
 
+
     const handleCloseExtrasModal = () => {
         setSelectedMenuItem(null);
         setShowextrasModal(false);
     }
 
-    
+    const openChoiceModal=()=>{
+        setShowChoiceModal(true);
+    }    
+
+    const handleChoice =(choice)=>{
+        if(choice ==='iWillChoose'){
+            setShowextrasModal(true);
+        }
+        else if(choice === 'repeatSame'){
+            addToCart(selectedMenuItem,selectedExtras)
+        }
+        setShowChoiceModal(false);
+    }
+
+    const handleIncrementWithChoice=(menuItem)=>{
+       const cartItem = cartItems.find(item=>item.menuItem.name===menuItem.name);
+
+       if(cartItem && cartItem ===1){
+          setSelectedMenuItem(menuItem);
+          openChoiceModal();
+       }
+       else{
+        handleIncrement(menuItem);
+       }
+    }
 
    
     const handleExtrasContinue = (selectedExtras) => {
@@ -190,6 +217,14 @@ const MenuList = (props) => {
                     handleExtrasContinue={handleExtrasContinue}
                 />
             }
+        {showChoiceModal && (
+        <ChoiceModal
+          showModal={showChoiceModal}
+          handleClose={() => setShowChoiceModal(false)}
+          handleChoice={handleChoice}
+        />
+      )}
+            
         </div>
     )
 }
